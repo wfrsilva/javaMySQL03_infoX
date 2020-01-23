@@ -31,3 +31,20 @@ select * from tbusuarios;
 
 -- apaga uma tupla da tabela
 delete from tbusuarios where iduser=2;
+
+
+create table tbclientes(
+idcli int primary key auto_increment,
+nomecli varchar(50) not null,
+endcli varchar(100),
+fonecli varchar(50) not null,
+emailcli varchar(50)
+);
+
+describe tbclientes;
+
+
+insert into tbclientes(nomecli, endcli, fonecli, emailcli)
+values('Linus Trovalds', 'Rua Tux, 2020', '9999-9999', 'linus@linux.com');
+
+select * from tbclientes;
