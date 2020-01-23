@@ -2,7 +2,7 @@
 -- create DATABASE dbinfox;
 -- use dbinfox;
 create table tbusuarios (
-idsuer int primary key,
+iduser int primary key,
 usuario varchar(50) not null,
 fone varchar (15),
 login varchar(15) not null unique,
@@ -10,3 +10,24 @@ senha varchar (15) not null
 );
 
 describe tbusuarios;
+-- CRUD
+insert into tbusuarios (iduser, usuario, fone, login, senha)
+values(1, 'Wendel Silva', '9999-0000', 'wfrsilva', '123456');
+
+insert into tbusuarios (iduser, usuario, fone, login, senha)
+values(2, 'codorna Silvassauro', '9999-2222', 'codorna', '654321');
+
+insert into tbusuarios (iduser, usuario, fone, login, senha)
+values(3, 'administrador', '9999-3333', 'adm', '123');
+
+-- exibe tabela Read -> select
+select * from tbusuarios;
+
+-- modificar (Update CRUD) 
+update tbusuarios set fone = '9999-1111' where iduser=1;
+
+-- exibe tabela Read -> select
+select * from tbusuarios;
+
+-- apaga uma tupla da tabela
+delete from tbusuarios where iduser=2;
