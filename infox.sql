@@ -49,7 +49,7 @@ values('Linus Trovalds', 'Rua Tux, 2020', '9999-9999', 'linus@linux.com');
 
 select * from tbclientes;
 
-
+use dbinfox;
 create table tbos(
 os int primary key auto_increment,
 data_os timestamp default current_timestamp,
@@ -59,4 +59,20 @@ servico varchar(150),
 tecnico varchar(30),
 valor decimal(10,2),
 idcli int not null,
+foreign key(idcli) references tbclientes(idcli)
 );
+
+describe tbos;
+
+insert into tbos (equipamento, defeito, servico, tecnico, valor,idcli)
+values ('notebook', 'nao liga', 'troca de fonte', 'zé', 87.50, 1);
+
+select * from tbos;
+
+-- inner join - informaçoes de duas tabelas
+select
+O.os, equipamento, defeito, servico, valor,
+C.nomecli, fonecli
+from tbos as O
+inner join tbclientes as C
+on (O.idcli = C.idcli);
