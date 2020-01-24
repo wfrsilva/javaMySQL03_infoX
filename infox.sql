@@ -71,8 +71,10 @@ select * from tbos;
 
 -- inner join - informaçoes de duas tabelas
 select
-O.os, equipamento, defeito, servico, valor,
+O.os, data_os, equipamento, defeito, servico, valor,
 C.nomecli, fonecli
 from tbos as O
 inner join tbclientes as C
 on (O.idcli = C.idcli);
+
+
