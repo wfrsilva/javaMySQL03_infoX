@@ -66,7 +66,7 @@ describe tbos;
 
 insert into tbos (equipamento, defeito, servico, tecnico, valor,idcli)
 values ('notebook', 'nao liga', 'troca de fonte', 'zé', 87.50, 1);
-
+use dbinfox;
 select * from tbos;
 
 -- inner join - informaçoes de duas tabelas

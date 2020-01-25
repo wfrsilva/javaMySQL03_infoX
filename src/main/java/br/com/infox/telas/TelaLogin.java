@@ -20,6 +20,7 @@ public class TelaLogin extends javax.swing.JFrame {
             System.out.println(getClass().getProtectionDomain().getCodeSource().getLocation());
             lblStatus.setIcon(new javax.swing.ImageIcon("Z:\\java\\javaMySQL03_infoX\\src\\main\\java\\br\\com\\infox\\icones\\dbok.png"));
             //lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/dbok.png")));
+            
         }//if
         else{
             lblStatus.setIcon(new javax.swing.ImageIcon("Z:\\java\\javaMySQL03_infoX\\src\\main\\java\\br\\com\\infox\\icones\\dberror.png"));
