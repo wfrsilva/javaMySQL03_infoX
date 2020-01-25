@@ -14,6 +14,6 @@ Acesso à plataforma para baixar icones: https://www.aulaead.com/
 [icones_ferramentas-1547591893503.zip](https://s3.amazonaws.com/thinkific-import/39810/icones_ferramentas-1547591893503.zip)
 
 ## Icones
-- [iconsplace](https://iconsplace.com/custom-color/accept-database-icon/)
+- [iconsplace.com](https://iconsplace.com/custom-color/accept-database-icon/)
 
-- [iconfinder](https://www.iconfinder.com/)
+- [iconfinder.com](https://www.iconfinder.com/)
