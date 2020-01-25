@@ -1,2 +1,3 @@
 br\com\infox\telas\TelaLogin.class
+br\com\infox\dal\ModuloConexao.class
 br\com\infox\telas\TelaLogin$1.class
