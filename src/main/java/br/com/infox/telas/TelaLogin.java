@@ -3,6 +3,7 @@ package br.com.infox.telas;
 
 import java.sql.*;
 import br.com.infox.dal.ModuloConexao;
+import javax.swing.ImageIcon;
 
 public class TelaLogin extends javax.swing.JFrame {
     Connection conexao = null;
@@ -15,10 +16,12 @@ public class TelaLogin extends javax.swing.JFrame {
         conexao = ModuloConexao.conector();
         //System.out.println("TelaLogin.conexao : " + conexao);
         if(conexao != null){
-            lblStatus.setText("Conectado");
+            lblStatus.setIcon(new javax.swing.ImageIcon("Z:\\java\\javaMySQL03_infoX\\src\\main\\java\\br\\com\\infox\\icones\\dbok.png"));
+            //lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/dbok.png")));
         }//if
         else{
-            lblStatus.setText("NAO Conectado");
+            lblStatus.setIcon(new javax.swing.ImageIcon("Z:\\java\\javaMySQL03_infoX\\src\\main\\java\\br\\com\\infox\\icones\\dberror.png"));
+           // lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/dberror.png")));
         }//else
     }//constructor
 
@@ -49,7 +52,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
         btnLogin.setText("Login");
 
-        lblStatus.setText("status");
+        lblStatus.setIcon(new javax.swing.ImageIcon("Z:\\java\\javaMySQL03_infoX\\src\\main\\java\\br\\com\\infox\\icones\\delete.png")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

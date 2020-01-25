@@ -90,7 +90,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblStatus">
       <Properties>
-        <Property name="text" type="java.lang.String" value="status"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="2" name="Z:\java\javaMySQL03_infoX\src\main\java\br\com\infox\icones\delete.png"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>
