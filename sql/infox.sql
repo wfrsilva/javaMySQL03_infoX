@@ -20,6 +20,9 @@ values(2, 'codorna Silvassauro', '9999-2222', 'codorna', '654321');
 insert into tbusuarios (iduser, usuario, fone, login, senha)
 values(3, 'administrador', '9999-3333', 'adm', '123');
 
+insert into tbusuarios (iduser, usuario, fone, login, senha)
+values(4, 'admin', '9999-4444', 'admin', 'admin');
+
 -- exibe tabela Read -> select
 select * from tbusuarios;
 
@@ -77,4 +80,5 @@ from tbos as O
 inner join tbclientes as C
 on (O.idcli = C.idcli);
 
-
+select * from tbusuarios;
+select * from tbusuarios where login='admin' and senha='admin';
