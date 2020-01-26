@@ -15,7 +15,7 @@ insert into tbusuarios (iduser, usuario, fone, login, senha)
 values(1, 'Wendel Silva', '9999-0000', 'wfrsilva', '123456');
 
 insert into tbusuarios (iduser, usuario, fone, login, senha)
-values(2, 'codorna Silvassauro', '9999-2222', 'codorna', '654321');
+values(2, 'Codorna Silvassauro', '9999-2222', 'codorna', '654321');
 
 insert into tbusuarios (iduser, usuario, fone, login, senha)
 values(3, 'administrador', '9999-3333', 'adm', '123');
@@ -82,3 +82,16 @@ on (O.idcli = C.idcli);
 
 select * from tbusuarios;
 select * from tbusuarios where login='admin' and senha='admin';
+
+use dbinfox;
+describe tbusuarios;
+-- adicionando coluna da tabela
+alter table tbusuarios add column perfil varchar (20) not null;
+
+update tbusuarios set perfil ='admin' where iduser=4;
+update tbusuarios set perfil ='user' where iduser=1;
+
+insert into tbusuarios (iduser, usuario, fone, login, senha, perfil)
+values(2, 'Codorna Silvassauro', '9999-2222', 'codorna', 'cod', 'user');
+
+select * from tbusuarios;

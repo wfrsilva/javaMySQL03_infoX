@@ -3,6 +3,7 @@ package br.com.infox.telas;
 
 import java.sql.*;
 import br.com.infox.dal.ModuloConexao;
+import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -38,8 +39,19 @@ public class TelaLogin extends javax.swing.JFrame {
             rs = pst.executeQuery();
             
             if(rs.next()){
+                /*/ recupera o perfil tbusuario*/
+                String perfil = rs.getString(6);
+                //System.out.println("perfil: " + perfil);
+                                             
                 TelaPrincipal principal = new TelaPrincipal();
                 principal.setVisible(true);
+                TelaPrincipal.lblUsuario.setText(rs.getString(2));
+                /*/ tratamento perfil ususario*/
+                if(perfil.equals("admin")){
+                    TelaPrincipal.menRel.setEnabled(true);
+                    TelaPrincipal.menCadUsu.setEnabled(true);
+                    TelaPrincipal.lblUsuario.setForeground(Color.blue);
+                }//if
                 this.dispose();
                 conexao.close();
             }//if
