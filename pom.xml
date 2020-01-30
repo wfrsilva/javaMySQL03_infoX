@@ -19,6 +19,17 @@
             <version>5.1.48</version>
         </dependency>
     </dependencies>
+        <!-- https://maven.apache.org/plugins/maven-resources-plugin/examples/filter.html -->
+      <build>
+    
+          <resources>
+              <resource>
+                <directory>src/main/java/br/com/infox/icones</directory>
+              </resource>
+
+        </resources>
+    
+  </build>
 
 
 </project>
