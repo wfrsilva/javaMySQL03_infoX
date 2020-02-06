@@ -18,3 +18,4 @@ Acesso à plataforma para baixar icones: https://www.aulaead.com/
 - [iconsplace.com](https://iconsplace.com/custom-color/accept-database-icon/)
 
 - [iconfinder.com](https://www.iconfinder.com/)
+- [iconarchive.com](http://www.iconarchive.com/)
