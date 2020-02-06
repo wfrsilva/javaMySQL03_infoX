@@ -12,7 +12,11 @@ package br.com.infox.telas;
  */
 import java.sql.*;
 import br.com.infox.dal.ModuloConexao;
+import javax.swing.Icon;
 import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
 
 
 public class TelaUsuario extends javax.swing.JInternalFrame {
@@ -43,7 +47,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             }//if 
             else {
                 JOptionPane.showMessageDialog(null, "Usuario não Encontrado/Cadastrado.", "User não encontrado", JOptionPane.WARNING_MESSAGE);
-                limparCampos();
+                limparCamposExcetoID();
             }//else
             
         }//try 
@@ -52,16 +56,53 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         }//catch
         
     }//consultar
+        
+    private void adicionar(){
+        String sql = "insert into  tbusuarios(iduser, usuario, fone, login, senha, perfil)  values(?, ?, ?, ?, ?, ?)";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, txtUsuId.getText());
+            pst.setString(2, txtUsuNome.getText());
+            pst.setString(3, txtUsuFone.getText());
+            pst.setString(4, txtUsuLogin.getText());
+            pst.setString(5, txtUsuSenha.getText());
+            pst.setString(6, cboUsuPerfil.getSelectedItem().toString());
+            //atualiza usuaros com dados do form
+            //conifrmar insercao tabela
+            int adicionado = pst.executeUpdate();
+            if (adicionado > 0) {
+                //NAOFUNCIONOU//ImageIcon icon = createImageIcon("icones/salvosucesso.png");
+                //NAOFUNCIONOU//ImageIcon icon = createImageIcon("Z:/java/javaMySQL03_infoX/src/main/java/br/com/infox/icones/salvosucesso.png");
+                //NAOFUNCIONOU//JLabel lblIcon = new JLabel();
+                //NAOFUNCIONOU//lblIcon.setIcon(new javax.swing.ImageIcon("Z:\\java\\javaMySQL03_infoX\\src\\main\\java\\br\\com\\infox\\icones\\salvosucesso.png"));
+                JOptionPane.showMessageDialog(null, "Usuario: (" + txtUsuNome.getText() + ") foi adicionado com sucesso!", "Usuario adicionado com sucesso", JOptionPane.INFORMATION_MESSAGE);
+                limparTodosCampos();
+            }//if
+            
+        }//try
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e, "TelaUsuario.adicionar() -> ERRO", JOptionPane.ERROR_MESSAGE);
+        }//catch
+    }//adicionar
     
-    private void limparCampos(){
+    private void limparTodosCampos(){
+        txtUsuId.setText(null);
+        limparCamposExcetoID();
+    }//limparTodosCampos
+    
+    private void limparCamposExcetoID(){
         txtUsuNome.setText(null);
         txtUsuFone.setText(null);
         txtUsuLogin.setText(null);
         txtUsuSenha.setText(null);
         cboUsuPerfil.setSelectedItem(null);
         
-    }//limparCampos
-
+    }//limparCamposExcetoID
+    
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -113,6 +154,11 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         btnUsuCreate.setToolTipText("Adicionar");
         btnUsuCreate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnUsuCreate.setPreferredSize(new java.awt.Dimension(80, 80));
+        btnUsuCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUsuCreateActionPerformed(evt);
+            }
+        });
 
         btnUsuRead.setIcon(new javax.swing.ImageIcon("Z:\\java\\javaMySQL03_infoX\\src\\main\\java\\br\\com\\infox\\icones\\read.png")); // NOI18N
         btnUsuRead.setToolTipText("Consultar");
@@ -217,6 +263,11 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         consultar();
     }//GEN-LAST:event_btnUsuReadActionPerformed
 
+    private void btnUsuCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuCreateActionPerformed
+        // Chama metodo adicionar
+        adicionar();
+    }//GEN-LAST:event_btnUsuCreateActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnUsuCreate;
@@ -236,4 +287,15 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtUsuNome;
     private javax.swing.JTextField txtUsuSenha;
     // End of variables declaration//GEN-END:variables
+
+/** Returns an ImageIcon, or null if the path was invalid. */
+    protected static ImageIcon createImageIcon(String path) {
+        java.net.URL imgURL = TelaUsuario.class.getResource(path);
+        if (imgURL != null) {
+            return new ImageIcon(imgURL);
+        } else {
+            System.err.println("Couldn't find file: " + path);
+            return null;
+        }
+    }//ImageIcon
 }
