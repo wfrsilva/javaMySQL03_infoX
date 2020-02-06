@@ -95,3 +95,8 @@ insert into tbusuarios (iduser, usuario, fone, login, senha, perfil)
 values(2, 'Codorna Silvassauro', '9999-2222', 'codorna', 'cod', 'user');
 
 select * from tbusuarios;
+
+use dbinfox;
+describe tbusuarios;
+select * from tbusuarios;
+select * from tbusuarios where iduser=2;

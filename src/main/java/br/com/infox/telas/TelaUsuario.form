@@ -196,7 +196,7 @@
     <Component class="javax.swing.JButton" name="btnUsuRead">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="Z:\java\javaMySQL03_infoX\src\main\java\br\com\infox\icones\pesquisar.png"/>
+          <Image iconType="2" name="Z:\java\javaMySQL03_infoX\src\main\java\br\com\infox\icones\read.png"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Consultar"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -206,6 +206,9 @@
           <Dimension value="[80, 80]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUsuReadActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnUsuUpdate">
       <Properties>

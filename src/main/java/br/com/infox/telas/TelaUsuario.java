@@ -6,17 +6,61 @@
 package br.com.infox.telas;
 
 /**
- *
+ *Aula 13
+ * https://www.youtube.com/watch?v=z_KK-amMTDo&list=PLbEOwbQR9lqxsTusvu8wfkUECrmcV81MU&index=15
  * @author w7
  */
+import java.sql.*;
+import br.com.infox.dal.ModuloConexao;
+import javax.swing.JOptionPane;
+
+
 public class TelaUsuario extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form TelaUsuario
-     */
+    Connection conexao = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+
     public TelaUsuario() {
         initComponents();
-    }
+        conexao = ModuloConexao.conector();
+        
+    }//constructor
+    
+    private void consultar(){
+        String sql = "select * from tbusuarios where iduser=?";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, txtUsuId.getText());
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                txtUsuNome.setText(rs.getString(2));
+                txtUsuFone.setText(rs.getString(3));
+                txtUsuLogin.setText(rs.getString(4));
+                txtUsuSenha.setText(rs.getString(5));
+                cboUsuPerfil.setSelectedItem(rs.getString(6));
+                
+            }//if 
+            else {
+                JOptionPane.showMessageDialog(null, "Usuario não Encontrado/Cadastrado.", "User não encontrado", JOptionPane.WARNING_MESSAGE);
+                limparCampos();
+            }//else
+            
+        }//try 
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e, "TelaUsuario.consultar() -> ERRO", JOptionPane.ERROR_MESSAGE);
+        }//catch
+        
+    }//consultar
+    
+    private void limparCampos(){
+        txtUsuNome.setText(null);
+        txtUsuFone.setText(null);
+        txtUsuLogin.setText(null);
+        txtUsuSenha.setText(null);
+        cboUsuPerfil.setSelectedItem(null);
+        
+    }//limparCampos
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -70,10 +114,15 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         btnUsuCreate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnUsuCreate.setPreferredSize(new java.awt.Dimension(80, 80));
 
-        btnUsuRead.setIcon(new javax.swing.ImageIcon("Z:\\java\\javaMySQL03_infoX\\src\\main\\java\\br\\com\\infox\\icones\\pesquisar.png")); // NOI18N
+        btnUsuRead.setIcon(new javax.swing.ImageIcon("Z:\\java\\javaMySQL03_infoX\\src\\main\\java\\br\\com\\infox\\icones\\read.png")); // NOI18N
         btnUsuRead.setToolTipText("Consultar");
         btnUsuRead.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnUsuRead.setPreferredSize(new java.awt.Dimension(80, 80));
+        btnUsuRead.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUsuReadActionPerformed(evt);
+            }
+        });
 
         btnUsuUpdate.setIcon(new javax.swing.ImageIcon("Z:\\java\\javaMySQL03_infoX\\src\\main\\java\\br\\com\\infox\\icones\\update.png")); // NOI18N
         btnUsuUpdate.setToolTipText("Alterar");
@@ -162,6 +211,11 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
         setBounds(0, 0, 620, 540);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnUsuReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuReadActionPerformed
+        // Chama metodo Consultar
+        consultar();
+    }//GEN-LAST:event_btnUsuReadActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
