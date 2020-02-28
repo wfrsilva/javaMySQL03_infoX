@@ -18,4 +18,8 @@ Acesso à plataforma para baixar icones: https://www.aulaead.com/
 - [iconsplace.com](https://iconsplace.com/custom-color/accept-database-icon/)
 
 - [iconfinder.com](https://www.iconfinder.com/)
+
 - [iconarchive.com](http://www.iconarchive.com/)
+
+## Links
+- [Oracle Demo Dialog](https://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html)
