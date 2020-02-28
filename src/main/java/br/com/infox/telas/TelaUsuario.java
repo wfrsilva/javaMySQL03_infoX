@@ -68,16 +68,21 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             pst.setString(5, txtUsuSenha.getText());
             pst.setString(6, cboUsuPerfil.getSelectedItem().toString());
             //atualiza usuaros com dados do form
-            //conifrmar insercao tabela
-            int adicionado = pst.executeUpdate();
-            if (adicionado > 0) {
-                //NAOFUNCIONOU//ImageIcon icon = createImageIcon("icones/salvosucesso.png");
-                //NAOFUNCIONOU//ImageIcon icon = createImageIcon("Z:/java/javaMySQL03_infoX/src/main/java/br/com/infox/icones/salvosucesso.png");
-                //NAOFUNCIONOU//JLabel lblIcon = new JLabel();
-                //NAOFUNCIONOU//lblIcon.setIcon(new javax.swing.ImageIcon("Z:\\java\\javaMySQL03_infoX\\src\\main\\java\\br\\com\\infox\\icones\\salvosucesso.png"));
-                JOptionPane.showMessageDialog(null, "Usuario: (" + txtUsuNome.getText() + ") foi adicionado com sucesso!", "Usuario adicionado com sucesso", JOptionPane.INFORMATION_MESSAGE);
-                limparTodosCampos();
-            }//if
+            if ((txtUsuId.getText().isEmpty())||(txtUsuNome.getText().isEmpty())||(txtUsuLogin.getText().isEmpty())||(txtUsuSenha.getText().isEmpty())||(cboUsuPerfil.getSelectedItem() == null)) {
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios!", "Preencha os campos obrigatórios", JOptionPane.WARNING_MESSAGE);
+            } //if
+            else {
+                //confirmar insercao tabela
+                int adicionado = pst.executeUpdate();
+                if (adicionado > 0) {
+                    //NAOFUNCIONOU//ImageIcon icon = createImageIcon("icones/salvosucesso.png");
+                    //NAOFUNCIONOU//ImageIcon icon = createImageIcon("Z:/java/javaMySQL03_infoX/src/main/java/br/com/infox/icones/salvosucesso.png");
+                    //NAOFUNCIONOU//JLabel lblIcon = new JLabel();
+                    //NAOFUNCIONOU//lblIcon.setIcon(new javax.swing.ImageIcon("Z:\\java\\javaMySQL03_infoX\\src\\main\\java\\br\\com\\infox\\icones\\salvosucesso.png"));
+                    JOptionPane.showMessageDialog(null, "Usuario: (" + txtUsuNome.getText() + ") foi adicionado com sucesso!", "Usuario adicionado com sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    limparTodosCampos();
+                }//if
+            }//else
             
         }//try
         catch (Exception e) {
@@ -95,7 +100,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         txtUsuFone.setText(null);
         txtUsuLogin.setText(null);
         txtUsuSenha.setText(null);
-        cboUsuPerfil.setSelectedItem(null);
+       // cboUsuPerfil.setSelectedItem(null);
         
     }//limparCamposExcetoID
     
@@ -128,6 +133,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         btnUsuRead = new javax.swing.JButton();
         btnUsuUpdate = new javax.swing.JButton();
         btnUsuDelete = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -136,15 +142,17 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         setMinimumSize(new java.awt.Dimension(300, 250));
         setPreferredSize(new java.awt.Dimension(620, 540));
 
-        jLabel1.setText("ID");
+        jLabel1.setText("ID *");
 
-        jLabel2.setText("Nome");
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("Nome *");
 
-        jLabel3.setText("Login");
+        jLabel3.setText("Login *");
 
-        jLabel4.setText("Senha");
+        jLabel4.setText("Senha *");
 
-        jLabel5.setText("Perfil");
+        jLabel5.setText("Perfil *");
 
         jLabel6.setText("Fone");
 
@@ -180,6 +188,9 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         btnUsuDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnUsuDelete.setPreferredSize(new java.awt.Dimension(80, 80));
 
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel7.setText("* - campos obrigatorios");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -200,10 +211,16 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                                     .addComponent(txtUsuFone, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                     .addComponent(txtUsuLogin, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtUsuId, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel4)
-                                .addGap(27, 27, 27)
-                                .addComponent(txtUsuSenha))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel4)
+                                        .addGap(27, 27, 27)
+                                        .addComponent(txtUsuSenha))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(7, 7, 7))))
                             .addComponent(txtUsuNome))
                         .addGap(106, 106, 106))
                     .addGroup(layout.createSequentialGroup()
@@ -219,7 +236,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                                 .addGap(45, 45, 45)
                                 .addComponent(btnUsuDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(cboUsuPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(75, Short.MAX_VALUE))))
+                        .addContainerGap(97, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,7 +244,8 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtUsuId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUsuId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
@@ -281,6 +299,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField txtUsuFone;
     private javax.swing.JTextField txtUsuId;
     private javax.swing.JTextField txtUsuLogin;
