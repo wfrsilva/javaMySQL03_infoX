@@ -24,7 +24,8 @@
     
           <resources>
               <resource>
-                <directory>src/main/java/br/com/infox/icones</directory>
+                <!-- <directory>src/main/java/br/com/infox</directory>-->
+                 <directory>src/main/java/</directory>
               </resource>
 
         </resources>

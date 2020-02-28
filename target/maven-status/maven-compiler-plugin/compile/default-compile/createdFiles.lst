@@ -5,6 +5,7 @@ br\com\infox\dal\ModuloConexao.class
 br\com\infox\telas\TelaLogin$1.class
 br\com\infox\telas\TelaSobre.class
 br\com\infox\telas\TelaUsuario.class
+br\com\infox\telas\TelaUsuario$2.class
 br\com\infox\telas\TelaPrincipal$3.class
 br\com\infox\telas\TelaPrincipal$6.class
 br\com\infox\telas\TelaPrincipal$1.class
@@ -12,3 +13,4 @@ br\com\infox\telas\TelaSobre$1.class
 br\com\infox\telas\TelaPrincipal.class
 br\com\infox\telas\TelaLogin$2.class
 br\com\infox\telas\TelaPrincipal$4.class
+br\com\infox\telas\TelaUsuario$1.class
