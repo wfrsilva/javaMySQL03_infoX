@@ -133,7 +133,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         btnUsuRead = new javax.swing.JButton();
         btnUsuUpdate = new javax.swing.JButton();
         btnUsuDelete = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
+        lblCamposObrigatorios = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -188,8 +188,8 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         btnUsuDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnUsuDelete.setPreferredSize(new java.awt.Dimension(80, 80));
 
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel7.setText("* - campos obrigatorios");
+        lblCamposObrigatorios.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblCamposObrigatorios.setText("* - campos obrigatorios");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -219,7 +219,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                                         .addComponent(txtUsuSenha))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblCamposObrigatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(7, 7, 7))))
                             .addComponent(txtUsuNome))
                         .addGap(106, 106, 106))
@@ -245,7 +245,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblID)
                     .addComponent(txtUsuId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
+                    .addComponent(lblCamposObrigatorios))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNome)
@@ -293,7 +293,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnUsuRead;
     private javax.swing.JButton btnUsuUpdate;
     private javax.swing.JComboBox<String> cboUsuPerfil;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel lblCamposObrigatorios;
     private javax.swing.JLabel lblFone;
     private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblLogin;
