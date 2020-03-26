@@ -16,6 +16,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Cliente"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menCadCliActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menCadOS">
               <Properties>
@@ -194,6 +197,9 @@
           <Image iconType="3" name="/br/com/infox/icones/x.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="componentRemoved" listener="java.awt.event.ContainerListener" parameters="java.awt.event.ContainerEvent" handler="jLabel1ComponentRemoved"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblUsuario">
       <Properties>
