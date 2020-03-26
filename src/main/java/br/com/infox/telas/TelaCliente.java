@@ -18,7 +18,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
 
-    /**
+        /**
      * Creates new form TelaCliente
      */
     public TelaCliente() {
