@@ -93,10 +93,10 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtCliPesquisar" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblCliPesquisar" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Component id="lblCamposObrigatorios" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtCliPesquisar" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="131" max="-2" attributes="0"/>
@@ -121,7 +121,7 @@
                   <Component id="txtCliEmail" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btnCliAdicionar" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Component id="btnCliAlterar" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="btnCliRemover" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -177,6 +177,9 @@
           <Color id="Hand Cursor"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCliAdicionarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnCliAlterar">
       <Properties>

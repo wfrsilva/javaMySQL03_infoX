@@ -47,8 +47,7 @@ emailcli varchar(50)
 describe tbclientes;
 
 
-insert into tbclientes(nomecli, endcli, fonecli, emailcli)
-values('Linus Trovalds', 'Rua Tux, 2020', '9999-9999', 'linus@linux.com');
+
 
 select * from tbclientes;
 
@@ -98,5 +97,11 @@ select * from tbusuarios;
 
 use dbinfox;
 describe tbusuarios;
-select * from tbusuarios;
+select * from tbusuarios;	
 select * from tbusuarios where iduser=2;
+
+use dbinfox;
+describe tbclientes;
+insert into tbclientes(nomecli, endcli, fonecli, emailcli)
+values('Linus Trovalds', 'Rua Tux, 2020', '9999-9999', 'linus@linux.com');
+Select * from tbclientes;
