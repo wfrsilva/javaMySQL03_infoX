@@ -8,7 +8,7 @@ package br.com.infox.telas;
 import java.sql.*;
 import br.com.infox.dal.ModuloConexao;
 import javax.swing.JOptionPane;
-import net.proteanit.sql.DbUtils; // https://youtu.be/FvGjkVzdZ3Y
+import net.proteanit.sql.DbUtils;  //  https://youtu.be/FvGjkVzdZ3Y
 
 /**
  *
