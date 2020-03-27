@@ -14,8 +14,10 @@ Acesso à plataforma para baixar icones: https://www.aulaead.com/
 ## Bibliotecas 
 [Aula 19 - Projeto AngelsAndDemons para JTable](https://sourceforge.net/projects/finalangelsanddemons/)
 
+
 ## Material de Apoio
 [icones_ferramentas-1547591893503.zip](https://s3.amazonaws.com/thinkific-import/39810/icones_ferramentas-1547591893503.zip)
+
 
 ## Icones
 - [iconsplace.com](https://iconsplace.com/custom-color/accept-database-icon/)
