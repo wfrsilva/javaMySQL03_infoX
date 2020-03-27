@@ -8,6 +8,7 @@ package br.com.infox.telas;
 import java.sql.*;
 import br.com.infox.dal.ModuloConexao;
 import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -18,7 +19,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
 
-        /**
+    /**
      * Creates new form TelaCliente
      */
     public TelaCliente() {
@@ -88,6 +89,12 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
         btnCliRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/delete.png"))); // NOI18N
 
+        txtCliPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCliPesquisarKeyReleased(evt);
+            }
+        });
+
         lblCliPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/pesquisar.png"))); // NOI18N
 
         tblClientes.setModel(new javax.swing.table.DefaultTableModel(
@@ -101,6 +108,11 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblClientes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblClientesKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblClientes);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -202,6 +214,16 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         adicionar();
     }//GEN-LAST:event_btnCliAdicionarActionPerformed
 
+    private void tblClientesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblClientesKeyReleased
+        // era para ser o metodo txtCliPesquisarKeyReleased, criei esse aqui equivocadamente
+       // pesquisarCliente();
+    }//GEN-LAST:event_tblClientesKeyReleased
+
+    private void txtCliPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCliPesquisarKeyReleased
+        // Chamar o metodo pesquisarCliente
+        pesquisarCliente();
+    }//GEN-LAST:event_txtCliPesquisarKeyReleased
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCliAdicionar;
@@ -248,6 +270,24 @@ private void adicionar(){
             JOptionPane.showMessageDialog(null, e, "TelaCliente.adicionar() -> ERRO", JOptionPane.ERROR_MESSAGE);
         }//catch
     }//adicionar
+
+    //pesquisar clientes com filtro
+    private void pesquisarCliente(){
+        String sql = "Select * from tbclientes where nomecli like ?";
+        System.out.println("br.com.infox.telas.TelaCliente.pesquisarCliente()");
+        System.out.println("sql: " + sql);
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, txtCliPesquisar.getText() + "%");
+            rs = pst.executeQuery();
+            tblClientes.setModel(DbUtils.resultSetToTableModel(rs));
+            
+        } //thry
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e, "TelaCliente.pesquisarCliente() -> ERRO", JOptionPane.ERROR_MESSAGE);
+       }//catch
+        
+    }//pesquisarCliente
 
     private void limparTodosCampos(){
         txtCliNome.setText(null);
