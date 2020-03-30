@@ -108,6 +108,11 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblClientesMouseClicked(evt);
+            }
+        });
         tblClientes.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tblClientesKeyReleased(evt);
@@ -224,6 +229,11 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         pesquisarCliente();
     }//GEN-LAST:event_txtCliPesquisarKeyReleased
 
+    private void tblClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClientesMouseClicked
+        //evento para setar os campos da tabela clicando com o mouse
+        setarCampos();
+    }//GEN-LAST:event_tblClientesMouseClicked
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCliAdicionar;
@@ -288,6 +298,16 @@ private void adicionar(){
        }//catch
         
     }//pesquisarCliente
+    
+    public void setarCampos(){
+        int setar = tblClientes.getSelectedRow();
+        
+        txtCliNome.setText(tblClientes.getModel().getValueAt(setar, 1).toString());
+        txtCliEndereco.setText(tblClientes.getModel().getValueAt(setar, 2).toString());
+        txtCliFone.setText(tblClientes.getModel().getValueAt(setar, 3).toString());
+        txtCliEmail.setText(tblClientes.getModel().getValueAt(setar, 4).toString());
+        
+    } //setarCampos
 
     private void limparTodosCampos(){
         txtCliNome.setText(null);
