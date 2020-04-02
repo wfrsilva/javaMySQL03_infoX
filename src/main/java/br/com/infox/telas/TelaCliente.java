@@ -7,6 +7,8 @@ package br.com.infox.telas;
 
 import java.sql.*;
 import br.com.infox.dal.ModuloConexao;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;  //  https://youtu.be/FvGjkVzdZ3Y
 
@@ -90,6 +92,11 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         });
 
         btnCliRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/delete.png"))); // NOI18N
+        btnCliRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCliRemoverActionPerformed(evt);
+            }
+        });
 
         txtCliPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -260,6 +267,11 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCliIdActionPerformed
 
+    private void btnCliRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCliRemoverActionPerformed
+        // remover cliente
+        remover();
+    }//GEN-LAST:event_btnCliRemoverActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCliAdicionar;
@@ -281,6 +293,9 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtCliNome;
     private javax.swing.JTextField txtCliPesquisar;
     // End of variables declaration//GEN-END:variables
+    Icon trashIcon = createImageIcon("/br/com/infox/icones/trash-icon.png", "Você deletou algo!");
+    Icon databaseIcon = createImageIcon("/br/com/infox/icones/database-icon.png", "Você Criou algo!");
+    Icon dataEditIcon = createImageIcon("/br/com/infox/icones/data-edit-icon.png", "Você alterou algo!");
 
 private void adicionar(){
         String sql = "insert into  tbclientes( nomecli, endcli, fonecli, emailcli)  values(?, ?, ?, ?)";
@@ -298,7 +313,7 @@ private void adicionar(){
                 //confirmar insercao tabela
                 int adicionado = pst.executeUpdate();
                 if (adicionado > 0) {
-                    JOptionPane.showMessageDialog(null, "Cliente: (" + txtCliNome.getText() + ") foi adicionado com sucesso!", "Cliente adicionado com sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Cliente: (" + txtCliNome.getText() + ") foi adicionado com sucesso!", "Cliente adicionado com sucesso", JOptionPane.INFORMATION_MESSAGE,databaseIcon);
                     limparTodosCampos();
                 }//if
             }//else
@@ -330,11 +345,12 @@ private void adicionar(){
     public void setarCampos(){
         int setar = tblClientes.getSelectedRow();
         txtCliId.setText(tblClientes.getModel().getValueAt(setar, 0).toString());
-     
         txtCliNome.setText(tblClientes.getModel().getValueAt(setar, 1).toString());
         txtCliEndereco.setText(tblClientes.getModel().getValueAt(setar, 2).toString());
         txtCliFone.setText(tblClientes.getModel().getValueAt(setar, 3).toString());
         txtCliEmail.setText(tblClientes.getModel().getValueAt(setar, 4).toString());
+        //desabilita o botao adicionar
+        btnCliAdicionar.setEnabled(false);
         
     } //setarCampos
     
@@ -354,11 +370,12 @@ private void adicionar(){
             } //if
             else {
                 //confirmar alteracao tabela
-                int adicionado = pst.executeUpdate();
-                if (adicionado > 0) {
-                    JOptionPane.showMessageDialog(null, "Dados do Cliente: (" + txtCliNome.getText() + ") foram ALTERADOS com sucesso!", "Dados do cliente alterados com sucesso", JOptionPane.INFORMATION_MESSAGE);
+                int alterado = pst.executeUpdate();
+                if (alterado > 0) {
+                    JOptionPane.showMessageDialog(null, "Dados do Cliente: (" + txtCliNome.getText() + ") foram ALTERADOS com sucesso!", "Dados do cliente alterados com sucesso", JOptionPane.INFORMATION_MESSAGE, dataEditIcon);
                     limparTodosCampos();
                     pesquisarCliente();
+                    btnCliAdicionar.setEnabled(true);
                 }//if
             }//else
         }//try 
@@ -367,6 +384,33 @@ private void adicionar(){
         }//catch
 
     }//alterar
+    
+    private void remover(){
+        //confirmar remocao
+        int confirma = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja remover esse Cliente?","Atenção - Deseja Remover?", JOptionPane.YES_NO_OPTION);
+        
+        if (confirma==JOptionPane.YES_OPTION) {
+            String sql = "delete from tbclientes where idcli=?";
+            try {
+                pst = conexao.prepareStatement(sql);
+                pst.setString(1, txtCliId.getText());
+                int apagado = pst.executeUpdate();
+                if (apagado>0){
+                    
+                    JOptionPane.showMessageDialog(null, "Cliente: (" + txtCliNome.getText() + ") foi REMOVIDO com sucesso!", "Cliente REMOVIDO com sucesso", JOptionPane.INFORMATION_MESSAGE, trashIcon);
+                    limparTodosCampos();
+                }//if
+            }//try 
+            catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e,"TelaCliente.remover() -> ERRO", JOptionPane.ERROR_MESSAGE);
+            }//catch
+            
+        }//if 
+        else {
+            System.out.println("TelaCliente.remover() - desistiu de deletar o cliente.");
+        }//else
+        
+    }//remover
 
     private void limparTodosCampos(){
         txtCliNome.setText(null);
@@ -374,5 +418,15 @@ private void adicionar(){
         txtCliFone.setText(null);
         txtCliEmail.setText(null);
     }//limparCamposExcetoID
+    
+    protected static ImageIcon createImageIcon(String path, String description) {
+        java.net.URL imgURL = TelaCliente.class.getResource(path);
+        if (imgURL != null) {
+            return new ImageIcon(imgURL, description);
+        } else {
+            System.err.println("ImageIcon : Couldn't find file: " + path);
+            return null;
+        }
+    }//ImageIcon
 
 }//class
