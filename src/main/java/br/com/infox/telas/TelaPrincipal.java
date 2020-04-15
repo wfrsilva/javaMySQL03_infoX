@@ -185,7 +185,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menCadOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menCadOSActionPerformed
-        // TODO add your handling code here:
+        // chama a tela OS
+        TelaOS os = new TelaOS();
+        os.setVisible(true);
+        desktop.add(os);
     }//GEN-LAST:event_menCadOSActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated

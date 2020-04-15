@@ -106,3 +106,6 @@ insert into tbclientes(nomecli, endcli, fonecli, emailcli)
 values('Linus Trovalds', 'Rua Tux, 2020', '9999-9999', 'linus@linux.com');
 Select * from tbclientes;
 select * from tbclientes where nomecli like 'j%';
+
+use dbinfox;
+describe tbos;

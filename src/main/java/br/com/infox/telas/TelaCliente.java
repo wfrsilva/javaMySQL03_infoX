@@ -57,6 +57,10 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         lblCliId = new javax.swing.JLabel();
         txtCliId = new javax.swing.JTextField();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setTitle("Clientes");
         setPreferredSize(new java.awt.Dimension(620, 540));
 
         lblCamposObrigatorios.setText("* Campos Obrigatorios");
