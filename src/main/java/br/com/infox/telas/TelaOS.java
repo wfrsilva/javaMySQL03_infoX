@@ -375,7 +375,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtOSActionPerformed
 
     private void txtCliPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCliPesquisarKeyReleased
-        // metodo pesquisar cliente
+        // metodo pesquisarCliente
         pesquisarCliente();
     }//GEN-LAST:event_txtCliPesquisarKeyReleased
 
