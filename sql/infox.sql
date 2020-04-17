@@ -106,6 +106,10 @@ insert into tbclientes(nomecli, endcli, fonecli, emailcli)
 values('Linus Trovalds', 'Rua Tux, 2020', '9999-9999', 'linus@linux.com');
 Select * from tbclientes;
 select * from tbclientes where nomecli like 'j%';
+Select idcli, nomecli, fonecli from tbclientes where nomecli like 'Cl%';
+-- apelidos aos campos da tabela
+Select idcli as Id, nomecli as Nome, fonecli as Fone from tbclientes where nomecli like 'Cl%';
+
 
 use dbinfox;
 describe tbos;

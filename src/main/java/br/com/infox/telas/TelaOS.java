@@ -4,19 +4,41 @@
  * and open the template in the editor.
  */
 package br.com.infox.telas;
+import java.sql.*;
+import br.com.infox.dal.ModuloConexao;
+import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;  //  https://youtu.be/FvGjkVzdZ3Y 
 
-/**
- *
- * @author w7
- */
+
 public class TelaOS extends javax.swing.JInternalFrame {
-
-    /**
-     * Creates new form TelaOS
-     */
+    
+    Connection conexao = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    
+    /** * Creates new form TelaOS      */
     public TelaOS() {
         initComponents();
-    }
+        conexao = ModuloConexao.conector();
+    }//TelaOS
+    
+    private void pesquisarCliente(){
+        String sql = "select idcli as Id, nomecli as Nome, fonecli as Fone from tbclientes where nomecli like ?";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, txtCliPesquisar.getText() + "%");
+            rs = pst.executeQuery();
+            tblClientes.setModel(DbUtils.resultSetToTableModel(rs));
+        } //try
+        catch (Exception e) {
+             JOptionPane.showMessageDialog(null, e, "TelaOS.pesquisarCliente() -> ERRO", JOptionPane.ERROR_MESSAGE);
+        }//catch
+    }//pesquisarCliente
+    
+    private void setarCampos(){
+        int setar = tblClientes.getSelectedRow();
+        txtCliId.setText(tblClientes.getModel().getValueAt(setar, 0).toString());
+    }//setarCampos
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -128,6 +150,12 @@ public class TelaOS extends javax.swing.JInternalFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Cliente"));
 
+        txtCliPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCliPesquisarKeyReleased(evt);
+            }
+        });
+
         lblIconPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/pesquisar.png"))); // NOI18N
 
         lblCliId.setText("Id *");
@@ -149,6 +177,11 @@ public class TelaOS extends javax.swing.JInternalFrame {
                 "Id", "Nome", "Fone"
             }
         ));
+        tblClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblClientesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblClientes);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -340,6 +373,16 @@ public class TelaOS extends javax.swing.JInternalFrame {
     private void txtOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOSActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtOSActionPerformed
+
+    private void txtCliPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCliPesquisarKeyReleased
+        // metodo pesquisar cliente
+        pesquisarCliente();
+    }//GEN-LAST:event_txtCliPesquisarKeyReleased
+
+    private void tblClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClientesMouseClicked
+        // metodo setarCampos
+        setarCampos();
+    }//GEN-LAST:event_tblClientesMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
