@@ -5,8 +5,11 @@
  */
 package br.com.infox.telas;
 
+import java.beans.PropertyVetoException;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -187,6 +190,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void menCadOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menCadOSActionPerformed
         // chama a tela OS
         TelaOS os = new TelaOS();
+        try {
+            os.setMaximum(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         os.setVisible(true);
         desktop.add(os);
     }//GEN-LAST:event_menCadOSActionPerformed
@@ -216,6 +224,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void menCadUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menCadUsuActionPerformed
         // abre form TelaUsuario no DesktopPane
         TelaUsuario usuario = new TelaUsuario();
+        try {
+            usuario.setMaximum(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         usuario.setVisible(true);
         desktop.add(usuario);        
         
@@ -228,6 +241,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void menCadCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menCadCliActionPerformed
         // Chamar tela cliente
         TelaCliente cliente = new TelaCliente();
+        try {
+            cliente.setMaximum(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         cliente.setVisible(true);
         desktop.add(cliente);
     }//GEN-LAST:event_menCadCliActionPerformed
