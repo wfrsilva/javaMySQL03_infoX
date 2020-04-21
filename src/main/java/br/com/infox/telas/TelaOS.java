@@ -53,6 +53,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
             pst.setString(4, txtOSDef.getText());
             pst.setString(5, txtOSServ.getText());
             pst.setString(6, txtOSTec.getText());
+            //substitui virgula por ponto
             pst.setString(7, txtOSValor.getText().replace(",", "."));
             pst.setString(8, txtCliId.getText());
             
@@ -63,15 +64,15 @@ public class TelaOS extends javax.swing.JInternalFrame {
             else{
                 int adicionado = pst.executeUpdate();
                 if(adicionado > 0){
-                    JOptionPane.showMessageDialog(null, "Ordem de Serviço: (" + txtOSEquip.getText() + ") emitida com sucesso!", "OS emitida com sucesso", JOptionPane.INFORMATION_MESSAGE);
-                    limparTodosCampos();
+                    JOptionPane.showMessageDialog(null, "Ordem de Serviço: (" + txtOSEquip.getText() + ") EMITIDA com sucesso!", "OS emitida com sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    limparCamposClienteDetalhesOS();
                 }//if
                 
             }//else
             
         } //try
         catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, e, "TelaOS.emitirOS() -> ERRO", JOptionPane.ERROR_MESSAGE);
+              JOptionPane.showMessageDialog(null, e, "TelaOS.emitirOS() -> ERRO", JOptionPane.ERROR_MESSAGE);
 
         }//catch
     }//emitirOS
@@ -123,6 +124,41 @@ public class TelaOS extends javax.swing.JInternalFrame {
              System.out.println(er);
         }//catch
     }//pesquisarOS
+    
+    //alterar os
+    private void alterarOS(){
+         String sql= "update tbos set tipo=?, situacao=?, equipamento=?, defeito=?, servico=?, tecnico=?, valor=? where os=?";
+         try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, tipo);
+            pst.setString(2, cboOSSit.getSelectedItem().toString());
+            pst.setString(3, txtOSEquip.getText());
+            pst.setString(4, txtOSDef.getText());
+            pst.setString(5,txtOSServ.getText());
+            pst.setString(6, txtOSTec.getText());
+            //substitui virgula por ponto
+            pst.setString(7, txtOSValor.getText().replace(",","."));
+            pst.setString(8, txtOS.getText());
+            //validar campso obrigatorios
+            if( (txtCliId.getText().isEmpty()) || (txtOSEquip.getText().isEmpty()) || (txtOSDef.getText().isEmpty()) ){
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos OBRIGATÓRIOS!", "Preencha os campos obrigatórios", JOptionPane.WARNING_MESSAGE);
+            }//if
+            else{
+                int alterado=pst.executeUpdate();
+                if(alterado > 0){
+                    JOptionPane.showMessageDialog(null, "Ordem de Serviço: (" + txtOSEquip.getText() + ") ALTERADA com Sucesso", "OS alterada com sucesso", JOptionPane.INFORMATION_MESSAGE);
+                    limparTodosCampos();
+                    //Habilitar objetos
+                    btnOSAdicionar.setEnabled(true);
+                    txtCliPesquisar.setEnabled(true);
+                    tblClientes.setVisible(true);
+                }//if
+            }//else
+        }//try 
+         catch (Exception e) {
+             JOptionPane.showMessageDialog(null, e , "TelaOS.alterarOS - > ERRO", JOptionPane.ERROR_MESSAGE);
+        }//catch
+    }//alterarOS
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -383,6 +419,11 @@ public class TelaOS extends javax.swing.JInternalFrame {
         btnOSAlterar.setToolTipText("Alterar OS");
         btnOSAlterar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnOSAlterar.setPreferredSize(new java.awt.Dimension(80, 80));
+        btnOSAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOSAlterarActionPerformed(evt);
+            }
+        });
 
         btnOSExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/delete.png"))); // NOI18N
         btnOSExcluir.setToolTipText("Excluir OS");
@@ -528,9 +569,15 @@ public class TelaOS extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void btnOSPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOSPesquisarActionPerformed
-        // chama o meto pesquisarOS
+        // chama  metodo pesquisarOS
         pesquisarOS();
     }//GEN-LAST:event_btnOSPesquisarActionPerformed
+
+    private void btnOSAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOSAlterarActionPerformed
+        // chama metodo alterarOS
+        alterarOS();
+        
+    }//GEN-LAST:event_btnOSAlterarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -568,12 +615,20 @@ public class TelaOS extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtOSValor;
     // End of variables declaration//GEN-END:variables
 
-    private void limparTodosCampos() {
+    private void limparTodosCampos(){
+        limparCamposClienteDetalhesOS();
+        txtOS.setText(null);
+        txtData.setText(null);
+        
+    }//limparTodosCampos
+    
+    private void limparCamposClienteDetalhesOS() {
        txtCliId.setText(null);
        txtOSEquip.setText(null);
        txtOSDef.setText(null);
        txtOSServ.setText(null);
        txtOSTec.setText(null);
        txtOSValor.setText(null);
-    }
-}
+    }//limparCamposClienteDetalhesOS
+    
+}//class TelaOS
