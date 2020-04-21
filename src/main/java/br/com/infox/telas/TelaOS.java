@@ -86,14 +86,41 @@ public class TelaOS extends javax.swing.JInternalFrame {
             if (rs.next()) {
                 txtOS.setText(rs.getString(1));
                 txtData.setText(rs.getString(2));
+                //radio buttons
+                String rbtTipo = rs.getString(3);
+                if (rbtTipo.equals("OS")) {
+                    rbtOS.setSelected(true);
+                    tipo="OS";
+                }//if 
+                else {
+                    rbtOrc.setSelected(true);
+                    tipo="Orçamento";
+                }//else
+                cboOSSit.setSelectedItem(rs.getString(4));
+                txtOSEquip.setText(rs.getString(5));
+                txtOSDef.setText(rs.getString(6));
+                txtOSServ.setText(rs.getString(7));
+                txtOSTec.setText(rs.getString(8));
+                txtOSValor.setText(rs.getString(9));
+                txtCliId.setText(rs.getString(10));
+                
+                //evitando problemas adicao x aleracao
+                btnOSAdicionar.setEnabled(false);
+                txtCliPesquisar.setEnabled(false);
+                tblClientes.setVisible(false);
+                
             }//if 
             else {
                 JOptionPane.showMessageDialog(null,"OS Não cadastrada" , "TelaOS.pesquisarOS Não Cadastrada", JOptionPane.ERROR_MESSAGE);
             }//else
             
         }//try
-        catch (Exception e) {
-             JOptionPane.showMessageDialog(null, e, "TelaOS.pesquisarOS() -> ERRO", JOptionPane.ERROR_MESSAGE);
+        catch (com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException e) {
+             JOptionPane.showMessageDialog(null, "Ordem de Serviço INVÁLIDA!", "TelaOS.pesquisarOS() -> OS Inválida", JOptionPane.ERROR_MESSAGE);
+        }//catch
+        catch (Exception er) {
+             JOptionPane.showMessageDialog(null, er, "TelaOS.pesquisarOS() -> ERRO", JOptionPane.ERROR_MESSAGE);
+             System.out.println(er);
         }//catch
     }//pesquisarOS
 
@@ -176,6 +203,7 @@ public class TelaOS extends javax.swing.JInternalFrame {
         });
 
         txtData.setEditable(false);
+        txtData.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
 
         buttonGroup1.add(rbtOrc);
         rbtOrc.setText("Orçamento");
