@@ -75,6 +75,27 @@ public class TelaOS extends javax.swing.JInternalFrame {
 
         }//catch
     }//emitirOS
+    
+    //pesquisar uma OS
+    private void pesquisarOS(){
+        String numOS = JOptionPane.showInputDialog("Número da OS: ");
+        String sql = "Select * from tbos where os=" + numOS;
+        try {
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                txtOS.setText(rs.getString(1));
+                txtData.setText(rs.getString(2));
+            }//if 
+            else {
+                JOptionPane.showMessageDialog(null,"OS Não cadastrada" , "TelaOS.pesquisarOS Não Cadastrada", JOptionPane.ERROR_MESSAGE);
+            }//else
+            
+        }//try
+        catch (Exception e) {
+             JOptionPane.showMessageDialog(null, e, "TelaOS.pesquisarOS() -> ERRO", JOptionPane.ERROR_MESSAGE);
+        }//catch
+    }//pesquisarOS
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -182,12 +203,19 @@ public class TelaOS extends javax.swing.JInternalFrame {
                     .addComponent(lblOS)
                     .addComponent(txtOS, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rbtOrc))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rbtOS)
-                    .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblData))
-                .addGap(31, 31, 31))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                        .addComponent(rbtOS)
+                        .addGap(31, 31, 31))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblData)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txtData))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -317,6 +345,11 @@ public class TelaOS extends javax.swing.JInternalFrame {
         btnOSPesquisar.setToolTipText("Pesquisar OS");
         btnOSPesquisar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnOSPesquisar.setPreferredSize(new java.awt.Dimension(80, 80));
+        btnOSPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOSPesquisarActionPerformed(evt);
+            }
+        });
 
         btnOSAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/update.png"))); // NOI18N
         btnOSAlterar.setToolTipText("Alterar OS");
@@ -465,6 +498,11 @@ public class TelaOS extends javax.swing.JInternalFrame {
         rbtOrc.setSelected(true);
         tipo = "Orçamento";
     }//GEN-LAST:event_formInternalFrameOpened
+
+    private void btnOSPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOSPesquisarActionPerformed
+        // chama o meto pesquisarOS
+        pesquisarOS();
+    }//GEN-LAST:event_btnOSPesquisarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
