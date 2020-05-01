@@ -119,3 +119,5 @@ alter table tbos add tipo varchar(15) not null after data_os;
  alter table tbos add situacao varchar(20) not null after tipo;
 describe tbos;
 select * from tbos;
+
+select * from tbclientes order by nomecli;

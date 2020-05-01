@@ -5,24 +5,38 @@
  */
 package br.com.infox.telas;
 
+import br.com.infox.icones.Icone;
+import br.com.infox.dal.ModuloConexao;
 import java.beans.PropertyVetoException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import java.sql.*;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
  * @author w7
  */
 public class TelaPrincipal extends javax.swing.JFrame {
-
+    Connection conexao = null;
+    Icone icone = new Icone();
+    Icon printIcon = icone.printIcon();
+    Icon cliRptIcon = icone.cliRptIcon();
+    Icon serRptIcon = icone.serRptIcon();
+    
     /**
      * Creates new form TelaPrincipal
      */
     public TelaPrincipal() {
         initComponents();
+        conexao = ModuloConexao.conector();
     }
 
     /**
@@ -44,6 +58,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menCadOS = new javax.swing.JMenuItem();
         menCadUsu = new javax.swing.JMenuItem();
         menRel = new javax.swing.JMenu();
+        menRelCli = new javax.swing.JMenuItem();
         menRelSer = new javax.swing.JMenuItem();
         menAju = new javax.swing.JMenu();
         menAjuSob = new javax.swing.JMenuItem();
@@ -120,6 +135,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menRel.setText("Relatório");
         menRel.setEnabled(false);
+
+        menRelCli.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK));
+        menRelCli.setText("Clientes");
+        menRelCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menRelCliActionPerformed(evt);
+            }
+        });
+        menRel.add(menRelCli);
 
         menRelSer.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
         menRelSer.setText("Serviços");
@@ -249,7 +273,25 @@ public class TelaPrincipal extends javax.swing.JFrame {
         cliente.setVisible(true);
         desktop.add(cliente);
     }//GEN-LAST:event_menCadCliActionPerformed
-
+    
+    private void menRelCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menRelCliActionPerformed
+        // Gerar Relatorio de clientes
+        int confirma = JOptionPane.showConfirmDialog(null, "Confirma a impressão do Relatorio de CLIENTES?", "Impressão Relatório clientes", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE, cliRptIcon);
+        if(confirma == JOptionPane.YES_OPTION){
+            //imprimir relaorio framework JasperReports
+            try {
+                //JasperPrint
+                JasperPrint print = JasperFillManager.fillReport("E:/java/reports/clientes.jasper",null, conexao);
+                JasperViewer.viewReport(print, false);                
+            } //try
+            catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e, "TelaPrincipal.menRelCliActionPerformed() -> ERRO", JOptionPane.ERROR_MESSAGE);
+                System.out.println("TelaPrincipal.menRelCliActionPerformed() -> ERRO\\r"+ e);
+            }//catch
+        }//if
+        
+    }//GEN-LAST:event_menRelCliActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -300,6 +342,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menOpc;
     private javax.swing.JMenuItem menOpcSai;
     public static javax.swing.JMenu menRel;
+    private javax.swing.JMenuItem menRelCli;
     private javax.swing.JMenuItem menRelSer;
     // End of variables declaration//GEN-END:variables
-}
+
+    
+    public static ImageIcon createImageIcon(String path, String description) {
+        java.net.URL imgURL = Icone.class.getResource(path);
+        if (imgURL != null) {
+            return new ImageIcon(imgURL, description);
+        } else {
+            System.err.println("ImageIcon : Couldn't find file: " + path);
+            return null;
+        }
+    }//ImageIcon
+
+}//class
