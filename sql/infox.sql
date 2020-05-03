@@ -120,4 +120,13 @@ alter table tbos add tipo varchar(15) not null after data_os;
 describe tbos;
 select * from tbos;
 
+use dbinfox;
 select * from tbclientes order by nomecli;
+
+-- inner join
+select 
+OSER.os, data_os, tipo, situacao, equipamento, valor,
+CLI.nomecli, fonecli
+from tbos as OSER
+inner join tbclientes as CLI
+on (CLI.idcli = OSER.idcli)

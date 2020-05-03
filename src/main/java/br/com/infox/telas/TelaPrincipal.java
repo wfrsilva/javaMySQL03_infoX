@@ -147,6 +147,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menRelSer.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
         menRelSer.setText("Serviços");
+        menRelSer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menRelSerActionPerformed(evt);
+            }
+        });
         menRel.add(menRelSer);
 
         jMenuBar1.add(menRel);
@@ -276,12 +281,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     
     private void menRelCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menRelCliActionPerformed
         // Gerar Relatorio de clientes
-        int confirma = JOptionPane.showConfirmDialog(null, "Confirma a impressão do Relatorio de CLIENTES?", "Impressão Relatório clientes", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE, cliRptIcon);
+        int confirma = JOptionPane.showConfirmDialog(null, "Confirma a emissão do Relatorio de CLIENTES?", "Impressão Relatório clientes", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE, cliRptIcon);
         if(confirma == JOptionPane.YES_OPTION){
-            //imprimir relaorio framework JasperReports
+            //emitir relatorio framework JasperReports
             try {
                 //JasperPrint
-                JasperPrint print = JasperFillManager.fillReport("E:/java/reports/clientes.jasper",null, conexao);
+                JasperPrint print = JasperFillManager.fillReport("E:\\java\\javaMySQL03_infoX\\reports\\clientes.jasper",null, conexao);
                 JasperViewer.viewReport(print, false);                
             } //try
             catch (Exception e) {
@@ -291,6 +296,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }//if
         
     }//GEN-LAST:event_menRelCliActionPerformed
+
+    private void menRelSerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menRelSerActionPerformed
+        // Gerar Relatorio de seriviços
+        int confirma = JOptionPane.showConfirmDialog(null, "Confirma a emissão  do Relatorio de SERVICOS?", "Impressão Relatório clientes", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE, serRptIcon);
+        if(confirma == JOptionPane.YES_OPTION){
+            //emitir relatorio framework JasperReports
+            try {
+                //JasperPrint
+                JasperPrint print = JasperFillManager.fillReport("E:\\java\\javaMySQL03_infoX\\reports\\servicos.jasper",null, conexao);
+                JasperViewer.viewReport(print, false);                
+            } //try
+            catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e, "TelaPrincipal.menRelSerActionPerformed() -> ERRO", JOptionPane.ERROR_MESSAGE);
+                System.out.println("TelaPrincipal.menRelSerActionPerformed() -> ERRO\\r"+ e);
+            }//catch
+        }//if
+    }//GEN-LAST:event_menRelSerActionPerformed
     
     /**
      * @param args the command line arguments
@@ -325,7 +347,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 new TelaPrincipal().setVisible(true);
             }
         });
-    }
+    }//main
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktop;
