@@ -70,11 +70,9 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="txtOSValor" pref="166" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="103" alignment="1" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="txtOSServ" alignment="0" pref="498" max="32767" attributes="0"/>
-                              <Component id="txtOSDef" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtOSEquip" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="txtOSServ" alignment="0" pref="498" max="32767" attributes="0"/>
+                          <Component id="txtOSDef" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtOSEquip" alignment="1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -507,6 +505,9 @@
           <Dimension value="[80, 80]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOSImprimirActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

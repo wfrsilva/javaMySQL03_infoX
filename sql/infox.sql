@@ -129,4 +129,6 @@ OSER.os, data_os, tipo, situacao, equipamento, valor,
 CLI.nomecli, fonecli
 from tbos as OSER
 inner join tbclientes as CLI
-on (CLI.idcli = OSER.idcli)
+on (CLI.idcli = OSER.idcli);
+
+select * from tbos where os=2;

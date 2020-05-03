@@ -7,8 +7,14 @@ package br.com.infox.telas;
 
 import java.sql.*;
 import br.com.infox.dal.ModuloConexao;
+import br.com.infox.icones.Icone;
+import java.util.HashMap;
+import javax.swing.Icon;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;  //  https://youtu.be/FvGjkVzdZ3Y 
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class TelaOS extends javax.swing.JInternalFrame {
 
@@ -17,6 +23,8 @@ public class TelaOS extends javax.swing.JInternalFrame {
     ResultSet rs = null;
     //variavel radio button
     private String tipo;
+    Icone icone = new Icone();
+    Icon printIcon = icone.printIcon();
 
     /**
      * * Creates new form TelaOS
@@ -186,6 +194,27 @@ public class TelaOS extends javax.swing.JInternalFrame {
         }//if
 
     }//excluirOS
+    
+   private void imprimirOS(){
+       // Imprimir OS
+        int confirma = JOptionPane.showConfirmDialog(null, "Confirma a impressão da Ordem de Serviço?", "Impressão OS", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE, icone.printIcon());
+        if(confirma == JOptionPane.YES_OPTION){
+            //imprimir framework JasperReports
+            try {
+                //hashmap para filtro
+                HashMap filtro = new HashMap();
+                filtro.put("os", Integer.parseInt(txtOS.getText()));
+                //JasperPrint
+                JasperPrint print = JasperFillManager.fillReport("E:\\java\\javaMySQL03_infoX\\reports\\os.jasper",filtro, conexao);
+                JasperViewer.viewReport(print, false);                
+            } //try
+            catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e, "TelaOS.imprimirOS() -> ERRO", JOptionPane.ERROR_MESSAGE);
+                System.out.println("TelaOS.imprimirOS()s -> ERRO\\r"+ e);
+            }//catch
+        }//if                                  
+      
+   }//imprimirOS
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -466,6 +495,11 @@ public class TelaOS extends javax.swing.JInternalFrame {
         btnOSImprimir.setToolTipText("Imprimir OS");
         btnOSImprimir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnOSImprimir.setPreferredSize(new java.awt.Dimension(80, 80));
+        btnOSImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOSImprimirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -497,10 +531,9 @@ public class TelaOS extends javax.swing.JInternalFrame {
                                 .addComponent(lblOSValor)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtOSValor, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtOSServ, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
-                                .addComponent(txtOSDef, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtOSEquip))))
+                            .addComponent(txtOSServ, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
+                            .addComponent(txtOSDef)
+                            .addComponent(txtOSEquip, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(58, 58, 58)
                         .addComponent(btnOSAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -615,6 +648,11 @@ public class TelaOS extends javax.swing.JInternalFrame {
         //chama metodo excluirOS
         excluirOS();
     }//GEN-LAST:event_btnOSExcluirActionPerformed
+
+    private void btnOSImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOSImprimirActionPerformed
+        // chama imprimirOS
+        imprimirOS();
+    }//GEN-LAST:event_btnOSImprimirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
